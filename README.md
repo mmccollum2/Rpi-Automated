@@ -2,6 +2,12 @@
 * Hardware : Raspberry Pi 4
 * Software : Rasbian Buster Lite
 
+### Quick Start
+
+```
+wget https://raw.githubusercontent.com/mmccollum2/Rpi-Automated/master/deploy.sh && chmod +x deploy.sh && sudo ./deploy.sh
+```
+
 ## Images
 - https://www.raspberrypi.org/downloads/raspbian/
 - Extract the Zip
