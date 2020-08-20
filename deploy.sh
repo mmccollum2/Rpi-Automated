@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#########Setup Variables###############
+#########Setup Variables.###############
 #Github public sshkeys
 github_user="mmccollum2"
 #New Username for SSH Access
