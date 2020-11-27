@@ -22,14 +22,15 @@ sudo usermod --lock pi
 #Create the new ssh only user with no password automatically, and (yes y) hits enter to all the "info"
 yes y | sudo adduser ${newuser} --disabled-password
 #create random password
-randompw=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9!@#$%^&*()' | fold -w 12 | head -n 1)
+#randompw=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9!@#$%^&*()' | fold -w 12 | head -n 1)
+randompw="ApplePie4"
 #set the new users password to the random above
 echo ${newuser}:${randompw} | sudo chpasswd
 #display the password so you can put it into lastpass dummy.
 echo -e "\nUserID:\n"$newuser "\nhas been created with the following password:     "${randompw}
 echo -e "\n"
 #I'll just wait here while you do that
-read -n1 -r -p "Make note of this password, Press any key to continue..." key
+#read -n1 -r -p "Make note of this password, Press any key to continue..." key
 
 
 #Add newly created user to the sudoers file since it doesn't have a password to authenticate to sudo anyway. Note - WIP -
@@ -54,18 +55,19 @@ fi
 sudo apt -y update && sudo apt -y upgrade
 
 #Get rid of extra packages we don't need
-sudo apt-get purge --auto-remove scratch debian-reference-en dillo idle3 python3-tk idle python-pygame python-tk lightdm gnome-themes-standard gnome-icon-theme raspberrypi-artwork gvfs-backends gvfs-fuse desktop-base lxpolkit netsurf-gtk zenity xdg-utils mupdf gtk2-engines alsa-utils  lxde lxtask menu-xdg gksu midori xserver-xorg xinit xserver-xorg-video-fbdev libraspberrypi-dev libraspberrypi-doc dbus-x11 libx11-6 libx11-data libx11-xcb1 x11-common x11-utils lxde-icon-theme gconf-service gconf2-common xserver* ^x11 ^libx ^lx samba* -y
+#sudo apt-get purge --auto-remove scratch debian-reference-en dillo idle3 python3-tk idle python-pygame python-tk lightdm gnome-themes-standard gnome-icon-theme raspberrypi-artwork gvfs-backends gvfs-fuse desktop-base lxpolkit netsurf-gtk zenity xdg-utils mupdf gtk2-engines alsa-utils  lxde lxtask menu-xdg gksu midori xserver-xorg xinit xserver-xorg-video-fbdev libraspberrypi-dev libraspberrypi-doc dbus-x11 libx11-6 libx11-data libx11-xcb1 x11-common x11-utils lxde-icon-theme gconf-service gconf2-common xserver* ^x11 ^libx ^lx samba* -y
 
 #Add a few, plus raspi-config which we convieniently removed from the above list of packages as a dependency?
-sudo apt -y install vim raspi-config dnsutils
+#sudo apt -y install vim raspi-config dnsutils
 
 #Clean up apt
 sudo apt-get clean -y && sudo apt-get autoremove -y
 
 #### change the boot to non-gui and console only and expand the filesystem
 ##  See https://raspberrypi.stackexchange.com/a/66939/8375 for a list of all the raspi-config magic you may want to automate.
-sudo raspi-config nonint do_boot_behaviour B1
-sudo raspi-config nonint do_expand_rootfs
+#sudo raspi-config nonint do_boot_behaviour B1
+#sudo raspi-config nonint is_installed realvnc-vnc-server
+#sudo raspi-config nonint do_expand_rootfs
 sudo raspi-config nonint do_change_timezone America/Edmonton
 
 #Blow away the default ssh config and recreate one from scratch
@@ -93,7 +95,7 @@ sed -i "s|[#]*PasswordAuthentication yes|PasswordAuthentication no|g" /etc/ssh/s
 
 cat /home/${newuser}/.ssh/authorized_keys
 #tail -n 5 /etc/dhcpcd.conf
-read -n1 -r -p "All done, Press any key to continue..." key
+#read -n1 -r -p "All done, Press any key to continue..." key
 
 sudo raspi-config nonint do_hostname "${hostname}"
 sudo reboot
