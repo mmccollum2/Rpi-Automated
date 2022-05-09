@@ -14,7 +14,8 @@ hostname="rpi4"
 #DNS Servers, put a space between if multiple
 #dns="208.67.222.222 1.1.1.1"
 
-
+#Install xkcdpass for password generation
+sudo apt install -y xkcdpass
 #########Begin Script###############
 
 #Lock the password for pi since it's default, and we won't be using it anymore
@@ -22,8 +23,15 @@ sudo usermod --lock pi
 #Create the new ssh only user with no password automatically, and (yes y) hits enter to all the "info"
 yes y | sudo adduser ${newuser} --disabled-password
 #create random password
+
+###   Other Password generation or default setting
 #randompw=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9!@#$%^&*()' | fold -w 12 | head -n 1)
-randompw="ApplePie4"
+#randompw="ApplePie4"
+
+#Generate an xkcdpass, 3 words long, and each word needs to be between a length of 4 and 10 with a dash separator
+##   https://linuxcommandlibrary.com/man/xkcdpass
+randompw=$(xkcdpass -n 3 --min 4 --max 10 -d -)
+
 #set the new users password to the random above
 echo ${newuser}:${randompw} | sudo chpasswd
 #display the password so you can put it into lastpass dummy.
@@ -98,4 +106,4 @@ cat /home/${newuser}/.ssh/authorized_keys
 #read -n1 -r -p "All done, Press any key to continue..." key
 
 sudo raspi-config nonint do_hostname "${hostname}"
-sudo reboot
+#sudo reboot
