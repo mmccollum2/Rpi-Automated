@@ -38,7 +38,7 @@ echo ${newuser}:${randompw} | sudo chpasswd
 echo -e "\nUserID:\n"$newuser "\nhas been created with the following password:     "${randompw}
 echo -e "\n"
 #I'll just wait here while you do that
-#read -n1 -r -p "Make note of this password, Press any key to continue..." key
+read -n1 -r -p "Make note of this password, Press any key to continue..." key
 
 
 #Add newly created user to the sudoers file since it doesn't have a password to authenticate to sudo anyway. Note - WIP -
