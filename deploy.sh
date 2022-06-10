@@ -67,7 +67,7 @@ sudo apt -y update && sudo apt -y upgrade
 
 #Add a few, plus raspi-config which we convieniently removed from the above list of packages as a dependency?
 #sudo apt -y install vim raspi-config dnsutils
-
+sudo apt -y install vim
 #Clean up apt
 sudo apt-get clean -y && sudo apt-get autoremove -y
 
@@ -103,7 +103,7 @@ sed -i "s|[#]*PasswordAuthentication yes|PasswordAuthentication no|g" /etc/ssh/s
 
 cat /home/${newuser}/.ssh/authorized_keys
 #tail -n 5 /etc/dhcpcd.conf
-#read -n1 -r -p "All done, Press any key to continue..." key
+read -n1 -r -p "All done, Press any key to reboot..." key
 
 sudo raspi-config nonint do_hostname "${hostname}"
-#sudo reboot
+sudo reboot
