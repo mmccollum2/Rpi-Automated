@@ -5,6 +5,13 @@
 ### Quick Start
 
 ```
+
+```
+V1 - # Grab the script and then make the changes if you need to in the script
+wget https://raw.githubusercontent.com/mmccollum2/Rpi-Automated/master/deploy.sh && chmod +x deploy.sh
+nano deploy.sh
+
+V2 # Or just grab it and run it as is  
 wget https://raw.githubusercontent.com/mmccollum2/Rpi-Automated/master/deploy.sh && chmod +x deploy.sh && sudo ./deploy.sh
 ```
 
